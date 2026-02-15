@@ -3,10 +3,16 @@ FROM docker.io/alpine as BUILDER
 
 RUN apk add --no-cache curl jq tar
 
-RUN export LITESTREAM_VERSION=$(curl --silent https://api.github.com/repos/benbjohnson/litestream/releases/latest | jq -r .tag_name) && curl -L https://github.com/benbjohnson/litestream/releases/download/${LITESTREAM_VERSION}/litestream-${LITESTREAM_VERSION}-linux-amd64.tar.gz -o litestream.tar.gz && tar xzvf litestream.tar.gz
+ARG LITESTREAM_VERSION=v0.5.6
+
+RUN curl -fL \
+  https://github.com/benbjohnson/litestream/releases/download/v0.5.6/litestream-0.5.6-linux-x86_64.tar.gz \
+  -o litestream.tar.gz \
+ && tar xzvf litestream.tar.gz
+ 
 
 # Main image
-FROM docker.io/louislam/uptime-kuma as KUMA
+FROM docker.io/louislam/uptime-kuma:beta as KUMA
 
 ARG UPTIME_KUMA_PORT=3001
 WORKDIR /app
