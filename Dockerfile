@@ -6,7 +6,7 @@ RUN apk add --no-cache curl jq tar
 
 # 1. Litestream holen
 ARG LITESTREAM_VERSION=v0.5.6
-RUN curl -fL https://github.com/benbjohnson/litestream/releases/download/${LITESTREAM_VERSION}/litestream-${LITESTREAM_VERSION}-linux-x86_64.tar.gz \
+RUN curl -fL https://github.com/benbjohnson/litestream/releases/download/v0.5.6/litestream-0.5.6-linux-x86_64.tar.gz \
     -o litestream.tar.gz \
     && tar xzvf litestream.tar.gz
 
